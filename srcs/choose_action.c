@@ -6,11 +6,20 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:38:23 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/20 16:30:32 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/20 17:15:25 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void		ft_do_rb(t_pile *b, t_inf *info)
+{
+	while (info->s_test > 0)
+	{
+		ft_rb(b, 'y');
+		info->s_test -= 1;
+	}
+}
 
 void	ft_choose_action4(t_pile *a, t_pile *b, t_inf *info, int choice)
 {
