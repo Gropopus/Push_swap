@@ -6,11 +6,15 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:45:10 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 15:26:17 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/20 16:02:01 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+/*
+** function to find the location of the median index
+*/
 
 int		ft_get_median_index(t_pile *b, int i)
 {
@@ -44,7 +48,12 @@ void	*ft_rot_to_pb_next(t_pile *a, t_nlist *tmp, t_nlist *save, t_inf *info)
 	return (tmp);
 }
 
-int		ft_nb_rot_to_pb(t_pile *a, t_inf *info, int val)
+/*
+** calculate the number of rotations to do before b pile if ready to be
+** pushed back and returns this number.
+*/
+
+int		ft_nb_rot_to_pb(t_pile *a, t_inf *info, int nb)
 {
 	t_nlist	*tmp;
 	t_nlist	*save;
@@ -52,7 +61,7 @@ int		ft_nb_rot_to_pb(t_pile *a, t_inf *info, int val)
 	info->pb_rot[0] = INT_MAX;
 	info->pb_rot[1] = ft_nlist_size(a->head);
 	info->pb_rot[2] = 0;
-	info->pb_rot[3] = val;
+	info->pb_rot[3] = nb;
 	info->pb_rot[4] = 0;
 	tmp = a->head->next;
 	save = a->head;
@@ -67,6 +76,14 @@ int		ft_nb_rot_to_pb(t_pile *a, t_inf *info, int val)
 	else
 		return (-(ft_nlist_size(a->head) - info->pb_rot[1]));
 }
+
+/*
+** this function set the 2 tests variables:
+** -> one with the number of rotations to do before b->nbr
+** is well placed (f_test = val)
+** ->the distance that separates the number from the median index
+** (s_test = ft_get_median_index)
+*/
 
 void	ft_test_actions(t_pile *a, t_pile *b, t_inf *info, int i)
 {

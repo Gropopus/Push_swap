@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:38:23 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 15:18:03 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/20 15:58:46 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,11 @@ void	ft_choose_action1(t_pile *a, t_pile *b, t_inf *info)
 	else
 		ft_choose_action4(a, b, info, 1);
 }
+
+/*
+** Function that manange actions according to the test_action results til
+** the a pile is back to full size
+*/
 
 void	ft_choose_action(t_pile *a, t_pile *b, t_inf *info)
 {

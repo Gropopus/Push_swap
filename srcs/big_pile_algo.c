@@ -6,11 +6,16 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:30:08 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 15:34:29 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/20 15:59:52 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+/*
+** Final function of the big pile sorting algo.
+** This function put the min value to the first posistion.
+*/
 
 void	last_sort(t_pile *a, t_inf *info, int i)
 {
@@ -40,6 +45,10 @@ void	last_sort(t_pile *a, t_inf *info, int i)
 		}
 }
 
+/*
+** Here the a pile size isn't bigger than 3. This function is sorting pile a
+*/
+
 void	sort_pile_a(t_pile *a, t_inf *info)
 {
 	if (a->head->nbr != info->min && a->head->next->next->nbr == info->max)
@@ -54,6 +63,11 @@ void	sort_pile_a(t_pile *a, t_inf *info)
 		ft_sa(a, 'y');
 	}
 }
+
+/*
+** function that sort the list if a pile size is bigger than 3.
+** the nbrs that are not min/max are pushed to pile b
+*/
 
 void	big_pile_algo2(t_pile *a, t_pile *b, t_inf *info)
 {
@@ -82,6 +96,13 @@ void	big_pile_algo2(t_pile *a, t_pile *b, t_inf *info)
 		sort_pile_a(a, info);
 	ft_choose_action(a, b, info);
 }
+
+/*
+** function that sorts each number of pile a bigger than the med or the
+** min value. if the nbr is located at the top of the med value ->ra else ->rra
+** break if the value is med or < than med.
+** if the a pile is smaller than 4 the pb.
+*/
 
 void	big_pile_algo(t_pile *a, t_pile *b, t_inf *info, int val)
 {

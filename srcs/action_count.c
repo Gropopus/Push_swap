@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:52:02 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 15:40:06 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/20 15:23:03 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,12 @@ void		ft_count_actions1(int val1, int val2, int *count)
 	else
 		ft_count_actions_last(val1, val2, count, 1);
 }
+
+/*
+** count the number of actions and returns it.
+** val1 is the nb of rotations to do
+** val2 is the number's distance from the median index
+*/
 
 int			ft_count_actions(int val1, int val2)
 {

@@ -6,11 +6,16 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 12:24:52 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 15:36:21 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:50:44 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+/*
+** This function returns 1 if the nbr is located before,
+** the median value and -1 if not.
+*/
 
 void	ft_init_tab(t_inf *info)
 {
