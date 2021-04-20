@@ -6,54 +6,29 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:52:02 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/20 15:23:03 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/20 16:57:29 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void		ft_count_actions_last(int val1, int val2, int *count, int choice)
+void		ft_counter(int val, int *count)
 {
-	val2 = -val2;
-	if (choice == 1)
-	{
-		while (val1 > 0 && val2 > 0)
-		{
-			*count += 1;
-			val1--;
-			val2--;
-		}
-	}
-	while (val1 > 0)
+	while (val > 0)
 	{
 		*count += 1;
-		val1--;
-	}
-	while (val2 > 0)
-	{
-		*count += 1;
-		val2--;
+		val--;
 	}
 }
 
 void		ft_count_actions3(int val2, int *count)
 {
 	if (val2 > 0)
-	{
-		while (val2 > 0)
-		{
-			*count += 1;
-			val2--;
-		}
-	}
+		ft_counter(val2, count);
 	else
 	{
 		val2 = -val2;
-		while (val2 > 0)
-		{
-			*count += 1;
-			val2--;
-		}
+		ft_counter(val2, count);
 	}
 }
 
@@ -67,19 +42,15 @@ void		ft_count_actions2(int val1, int val2, int *count)
 			val1--;
 			val2--;
 		}
-		while (val1 > 0)
-		{
-			*count += 1;
-			val1--;
-		}
-		while (val2 > 0)
-		{
-			*count += 1;
-			val2--;
-		}
+		ft_counter(val1, count);
+		ft_counter(val2, count);
 	}
 	else
-		ft_count_actions_last(val1, val2, count, 0);
+	{
+		val2 = -val2;
+		ft_counter(val1, count);
+		ft_counter(val2, count);
+	}
 }
 
 void		ft_count_actions1(int val1, int val2, int *count)
@@ -87,19 +58,21 @@ void		ft_count_actions1(int val1, int val2, int *count)
 	val1 = -val1;
 	if (val2 > 0)
 	{
-		while (val2 > 0)
-		{
-			*count += 1;
-			val2--;
-		}
-		while (val1 > 0)
+		ft_counter(val2, count);
+		ft_counter(val1, count);
+	}
+	else
+	{
+		val2 = -val2;
+		while (val1 > 0 && val2 > 0)
 		{
 			*count += 1;
 			val1--;
+			val2--;
 		}
+		ft_counter(val1, count);
+		ft_counter(val2, count);
 	}
-	else
-		ft_count_actions_last(val1, val2, count, 1);
 }
 
 /*
