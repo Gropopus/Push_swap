@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:59:26 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 15:26:48 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/20 13:58:42 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int				ft_check_double_nb(t_pile *a, char *av)
 	t_nlist			*tmp;
 
 	nb = ft_atoi_limit(av);
+	if (ft_strlen(av) > 11)
+		return (-1);
 	if (nb > 2147483647 || nb < -2147483648)
 		return (-1);
 	if (a)

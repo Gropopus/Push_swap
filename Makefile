@@ -6,7 +6,7 @@
 #    By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 18:54:46 by thsembel          #+#    #+#              #
-#    Updated: 2021/04/19 14:16:09 by thsembel         ###   ########.fr        #
+#    Updated: 2021/04/20 12:00:55 by thsembel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,9 @@ CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
 		@${CC} ${CFLAGS} -I${HEAD} -c $< -o ${<:.c=.o}
 		@echo "${GREEN}[ OK ]	${ORANGE}${<:.s=.o}${NC}"
 
+
+all:		${NAME} ${NAME2}
+
 ${NAME}:	${OBJS}
 			@make -C ${LIB_DIR}
 			@make -C ${LIB_DIR} bonus
@@ -83,7 +86,7 @@ ${NAME2}:	${OBJS2}
 			@${CC} ${CFLAGS} -I${HEAD} ${LIBFT} -o ${NAME2} $(OBJS2)
 			@echo "${GREEN}\nchecker		has been created${NC}"
 
-all:		${NAME} ${NAME2}
+#all:		${NAME} ${NAME2}
 
 clean:
 			@make -C $(LIB_DIR) clean

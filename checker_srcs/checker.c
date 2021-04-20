@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:09:58 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 15:49:00 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:27:55 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int		ft_add_and_check(t_pile *a, int ac, char **av)
 	int i;
 
 	i = 1;
+	if (ac == 1)
+		return (-1);
 	while (i < ac)
 	{
 		if ((ft_check_arg(a, av[i])) < 0)
