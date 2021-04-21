@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:41:31 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 16:19:34 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:16:28 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct			s_inf
 	int					max;
 	int					med;
 	int					size;
+	int					opt;
 	int					med_rot[4];
 	int					pb_rot[5];
 	int					f_test;
@@ -126,4 +127,12 @@ int						ft_is_ok(t_pile *a, t_pile *b);
 **		checker2.c
 */
 void					display_result(t_pile *a, t_pile *b);
+/*
+**		display_bonus.c
+*/
+void					ft_print_piles(t_pile *a, t_pile *b, int perm);
+void					ft_last_sort_bonus(t_pile *a, t_inf *info,
+		int i);
+int						ft_check_arg_opt(t_pile *a, t_inf *info, char **av,
+		int *nb_av);
 #endif

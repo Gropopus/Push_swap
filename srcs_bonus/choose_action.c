@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:38:23 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 14:55:34 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:23:54 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_choose_action4(t_pile *a, t_pile *b, t_inf *info, int choice)
 		while (info->f_test > 0 && info->s_test > 0)
 		{
 			ft_rrr(a, b, 'y');
+			ft_print_piles(a, b, info->opt);
 			info->f_test -= 1;
 			info->s_test -= 1;
 		}
@@ -27,25 +28,33 @@ void	ft_choose_action4(t_pile *a, t_pile *b, t_inf *info, int choice)
 	while (info->f_test > 0)
 	{
 		if (choice == 0)
+		{
 			ft_ra(a, 'y');
+			ft_print_piles(a, b, info->opt);
+		}
 		else
+		{
 			ft_rra(a, 'y');
+			ft_print_piles(a, b, info->opt);
+		}
 		info->f_test -= 1;
 	}
 	while (info->s_test > 0)
 	{
 		ft_rrb(b, 'y');
+		ft_print_piles(a, b, info->opt);
 		info->s_test -= 1;
 	}
 }
 
-void	ft_choose_action3(t_pile *b, t_inf *info)
+void	ft_choose_action3(t_pile *a, t_pile *b, t_inf *info)
 {
 	if (info->s_test > 0)
 	{
 		while (info->s_test > 0)
 		{
 			ft_rb(b, 'y');
+			ft_print_piles(a, b, info->opt);
 			info->s_test -= 1;
 		}
 	}
@@ -55,6 +64,7 @@ void	ft_choose_action3(t_pile *b, t_inf *info)
 		while (info->s_test > 0)
 		{
 			ft_rrb(b, 'y');
+			ft_print_piles(a, b, info->opt);
 			info->s_test -= 1;
 		}
 	}
@@ -67,17 +77,20 @@ void	ft_choose_action2(t_pile *a, t_pile *b, t_inf *info)
 		while (info->f_test > 0 && info->s_test > 0)
 		{
 			ft_rr(a, b, 'y');
+			ft_print_piles(a, b, info->opt);
 			info->f_test -= 1;
 			info->s_test -= 1;
 		}
 		while (info->f_test > 0)
 		{
 			ft_ra(a, 'y');
+			ft_print_piles(a, b, info->opt);
 			info->f_test -= 1;
 		}
 		while (info->s_test > 0)
 		{
 			ft_rb(b, 'y');
+			ft_print_piles(a, b, info->opt);
 			info->s_test -= 1;
 		}
 	}
@@ -93,11 +106,13 @@ void	ft_choose_action1(t_pile *a, t_pile *b, t_inf *info)
 		while (info->s_test > 0)
 		{
 			ft_rb(b, 'y');
+			ft_print_piles(a, b, info->opt);
 			info->s_test -= 1;
 		}
 		while (info->f_test > 0)
 		{
 			ft_rra(a, 'y');
+			ft_print_piles(a, b, info->opt);
 			info->f_test -= 1;
 		}
 	}
@@ -120,8 +135,9 @@ void	ft_choose_action(t_pile *a, t_pile *b, t_inf *info)
 		else if (info->f_test > 0)
 			ft_choose_action2(a, b, info);
 		else
-			ft_choose_action3(b, info);
+			ft_choose_action3(a, b, info);
 		ft_pa(a, b, 'y');
+		ft_print_piles(a, b, info->opt);
 	}
-	last_sort(a, info, 0);
+	ft_last_sort_bonus(a, info, 0);
 }

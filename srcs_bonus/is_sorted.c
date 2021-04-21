@@ -1,23 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker2.c                                         :+:      :+:    :+:   */
+/*   is_sorted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 14:35:47 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/20 17:21:05 by thsembel         ###   ########.fr       */
+/*   Created: 2021/04/17 18:29:04 by thsembel          #+#    #+#             */
+/*   Updated: 2021/04/19 15:24:21 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	display_result(t_pile *a, t_pile *b)
+int			ft_is_sorted(t_nlist *nlist)
 {
-	if ((ft_is_ok(a, b)) < 0)
-		ft_printf("%sKO\n", RED);
-	else if (ft_is_ok(a, b) == 0)
-		ft_printf("%sOK\n", GREEN);
-	ft_free_pile(a);
-	ft_free_pile(b);
+	if (nlist == NULL)
+		return (0);
+	else
+	{
+		while (nlist->next)
+		{
+			if (nlist->nbr > nlist->next->nbr)
+				return (0);
+			nlist = nlist->next;
+		}
+		return (1);
+	}
+}
+
+int			ft_is_rsorted(t_nlist *nlist)
+{
+	if (nlist == NULL)
+		return (0);
+	else
+	{
+		while (nlist->next)
+		{
+			if (nlist->nbr < nlist->next->nbr)
+				return (0);
+			nlist = nlist->next;
+		}
+		return (1);
+	}
 }

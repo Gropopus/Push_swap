@@ -6,7 +6,7 @@
 #    By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 18:54:46 by thsembel          #+#    #+#              #
-#    Updated: 2021/04/20 12:00:55 by thsembel         ###   ########.fr        #
+#    Updated: 2021/04/21 15:00:40 by thsembel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,24 @@ SRCS		=	./srcs/push_swap.c\
 				./srcs/median_rotation.c \
 				./srcs/action_count.c \
 				./srcs/choose_action.c \
-				./srcs/nlist_compare.c
+				./srcs/nlist_compare.c \
+
+SRCS_BONUS	=	./srcs_bonus/push_swap.c\
+				./srcs_bonus/check_arg.c\
+				./srcs_bonus/error.c\
+				./srcs_bonus/utils.c\
+				./srcs_bonus/algo.c \
+				./srcs_bonus/is_sorted.c\
+				./srcs_bonus/push_a_b.c \
+				./srcs_bonus/rotate_a_b.c \
+				./srcs_bonus/reverse_rot_a_b.c \
+				./srcs_bonus/swap_a_b.c \
+				./srcs_bonus/big_pile_algo.c \
+				./srcs_bonus/median_rotation.c \
+				./srcs_bonus/action_count.c \
+				./srcs_bonus/choose_action.c \
+				./srcs_bonus/nlist_compare.c \
+				./srcs_bonus/display_bonus.c
 
 SRCS2		=	./checker_srcs/utils.c \
 				./checker_srcs/check_arg.c \
@@ -64,6 +81,8 @@ OBJS		= ${SRCS:.c=.o}
 
 OBJS2		= ${SRCS2:.c=.o}
 
+OBJS_B		= ${SRCS_BONUS:.c=.o}
+
 RM			= rm -f
 
 CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
@@ -86,11 +105,13 @@ ${NAME2}:	${OBJS2}
 			@${CC} ${CFLAGS} -I${HEAD} ${LIBFT} -o ${NAME2} $(OBJS2)
 			@echo "${GREEN}\nchecker		has been created${NC}"
 
-#all:		${NAME} ${NAME2}
+bonus:		${OBJS_B}
+			@${CC} ${CFLAGS} -I${HEAD} ${LIBFT} -o ${NAME} $(OBJS_B)
+			@echo "pushswap	has been created\n${NC}"
 
 clean:
 			@make -C $(LIB_DIR) clean
-			@${RM} ${OBJS} ${OBJS2}
+			@${RM} ${OBJS} ${OBJS2} ${OBJS_B}
 			@echo "${GREEN}[ OK ]${RED}	*.o files	deleted${NC}"
 
 fclean:		clean

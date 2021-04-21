@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:52:11 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 10:12:19 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/21 15:47:29 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		set_pile(t_pile *a, t_inf *info, int ac, char **av)
 	i = 1;
 	while (i < ac)
 	{
-		if (ft_check_arg(a, av[i]) < 0)
+		if (ft_check_arg_opt(a, info, av, &i) < 0)
 		{
 			ft_error(a, NULL, info);
 			return (-1);
@@ -102,6 +102,7 @@ int		main(int ac, char **av)
 		return (-1);
 	if ((info = malloc(sizeof(t_inf))) == NULL)
 		return (-1);
+	info->opt = 0;
 	if ((set_pile(a, info, ac, av)) < 0)
 		return (-1);
 	if ((b = ft_new_pile()) == NULL)
