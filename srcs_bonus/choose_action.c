@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:38:23 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 17:23:54 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:02:01 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,5 @@ void	ft_choose_action(t_pile *a, t_pile *b, t_inf *info)
 		ft_pa(a, b, 'y');
 		ft_print_piles(a, b, info->opt);
 	}
-	ft_last_sort_bonus(a, info, 0);
+	ft_last_sort_bonus(a, info, 0, 0);
 }

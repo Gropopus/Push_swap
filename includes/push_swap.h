@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:41:31 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 17:16:28 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:51:47 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void					display_result(t_pile *a, t_pile *b);
 */
 void					ft_print_piles(t_pile *a, t_pile *b, int perm);
 void					ft_last_sort_bonus(t_pile *a, t_inf *info,
-		int i);
+		int i, int min_index);
 int						ft_check_arg_opt(t_pile *a, t_inf *info, char **av,
 		int *nb_av);
 #endif

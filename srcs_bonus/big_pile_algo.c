@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:30:08 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 17:08:58 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:01:34 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 ** This function put the min value to the first posistion.
 */
 
-void	ft_last_sort_bonus(t_pile *a, t_inf *info, int i)
+void	ft_last_sort_bonus(t_pile *a, t_inf *info, int i, int min_index)
 {
 	t_nlist	*tmp;
-	int		min_index;
 
 	tmp = a->head;
 	while (tmp)
@@ -77,6 +76,19 @@ void	sort_pile_a(t_pile *a, t_pile *b, t_inf *info)
 	}
 }
 
+void	sort_pile_first(t_pile *a, t_pile *b, t_inf *info)
+{
+	if (a->head->nbr == info->min && a->head->next->next->nbr != info->max)
+	{
+		ft_rra(a, 'y');
+		ft_print_piles(a, b, info->opt);
+		ft_sa(a, 'y');
+		ft_print_piles(a, b, info->opt);
+	}
+	else
+		sort_pile_a(a, b, info);
+}
+
 /*
 ** function that sort the list if a pile size is bigger than 3.
 ** the nbrs that are not min/max are pushed to pile b
@@ -102,15 +114,7 @@ void	big_pile_algo2(t_pile *a, t_pile *b, t_inf *info)
 			tmp = a->head;
 		}
 	}
-	if (a->head->nbr == info->min && a->head->next->next->nbr != info->max)
-	{
-		ft_rra(a, 'y');
-		ft_print_piles(a, b, info->opt);
-		ft_sa(a, 'y');
-		ft_print_piles(a, b, info->opt);
-	}
-	else
-		sort_pile_a(a, b, info);
+	sort_pile_first(a, b, info);
 	ft_choose_action(a, b, info);
 }
 
@@ -137,7 +141,7 @@ void	big_pile_algo(t_pile *a, t_pile *b, t_inf *info, int val)
 				ft_ra(a, 'y');
 				ft_print_piles(a, b, info->opt);
 			}
-				else if (val == -1)
+			else if (val == -1)
 			{
 				ft_rra(a, 'y');
 				ft_print_piles(a, b, info->opt);
