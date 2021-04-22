@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:01:03 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/22 12:55:39 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/22 14:07:44 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	sort_b_pile(t_pile *b, t_pile *a, t_inf *info)
 			ft_rb(b, 'y');
 		else
 		{
+			if (b->head && b->head && b->head->next
+				&& b->head->nbr < b->head->next->nbr
+				&& !ft_is_rsorted(b->head))
+				ft_sb(b, 'y');
 			if (((b->head && b->head->next
 				&& b->head->nbr > b->head->next->nbr)
 				|| (b->head && b->head->nbr == info->min))
 				&& !ft_is_rsorted(b->head))
 				ft_rb(b, 'y');
-			if (b->head && b->head && b->head->next
-				&& b->head->nbr < b->head->next->nbr
-				&& !ft_is_rsorted(b->head))
-				ft_sb(b, 'y');
 		}
 		ft_is_print(a, b, info);
 	}
@@ -36,6 +36,11 @@ void	sort_b_pile(t_pile *b, t_pile *a, t_inf *info)
 
 void	sort_a_pile_next(t_pile *a, t_pile *b, t_inf *info)
 {
+	if (a->head->nbr < info->med)
+	{
+		ft_pb(a, b, 'y');
+		ft_is_print(a, b, info);
+	}
 	if ((a->head->nbr < a->head->next->nbr && a->head->nbr >= info->med)
 		|| a->head->nbr == info->max)
 	{
@@ -53,26 +58,21 @@ void	sort_a_pile_next(t_pile *a, t_pile *b, t_inf *info)
 			ft_is_print(a, b, info);
 		}
 	}
-	if (a->head->nbr < info->med)
-	{
-		ft_pb(a, b, 'y');
-		ft_is_print(a, b, info);
-	}
 }
 
 void	sort_a_pile(t_pile *a, t_pile *b, t_inf *info)
 {
 	if (a->head->nbr > a->head->next->nbr)
 	{
-		if (b->head && b->head && b->head->next
+		if (a->head->nbr == info->max)
+		{
+			ft_ra(a, 'y');
+			ft_is_print(a, b, info);
+		}
+		else if (b->head && b->head && b->head->next
 			&& b->head->nbr < b->head->next->nbr && !ft_is_rsorted(b->head))
 		{
 			ft_ss(a, b, 'y');
-			ft_is_print(a, b, info);
-		}
-		else if (a->head->nbr == info->max)
-		{
-			ft_ra(a, 'y');
 			ft_is_print(a, b, info);
 		}
 		else
