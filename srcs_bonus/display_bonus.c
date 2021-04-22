@@ -6,11 +6,19 @@
 /*   By: thsembel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 14:20:30 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 17:23:12 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:49:49 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void	ft_is_print(t_pile *a, t_pile *b, t_inf *info)
+{
+	if (ft_nlist_size(b->head) >= 1)
+		ft_print_piles(a, b, info->opt);
+	else
+		ft_print_piles(a, NULL, info->opt);
+}
 
 void	ft_printf_listb(t_pile *b)
 {
@@ -48,8 +56,11 @@ void	ft_print_piles(t_pile *a, t_pile *b, int perm)
 	if (perm == 0)
 		return ;
 	ft_printf("\n****************************************\n");
-	ft_printf_lista(a);
-	ft_printf("%s|a|		%d%s\n", GREEN, a->tail->nbr, NC);
+	if (a != NULL)
+	{
+		ft_printf_lista(a);
+		ft_printf("%s|a|		%d%s\n", GREEN, a->tail->nbr, NC);
+	}
 	if (b != NULL)
 	{
 		ft_printf_listb(b);

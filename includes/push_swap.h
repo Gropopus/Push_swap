@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:41:31 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 17:51:47 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:50:27 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,16 @@ int						ft_is_ok(t_pile *a, t_pile *b);
 */
 void					display_result(t_pile *a, t_pile *b);
 /*
-**		display_bonus.c
+**		bonus modifications
 */
 void					ft_print_piles(t_pile *a, t_pile *b, int perm);
 void					ft_last_sort_bonus(t_pile *a, t_inf *info,
 		int i, int min_index);
+void					ft_choose_action5(t_pile *a, t_pile *b, t_inf *info,
+		int choice);
+void					push_to_b_loop(t_pile *a, t_pile *b, t_inf *info,
+		int val);
+void					ft_is_print(t_pile *a, t_pile *b, t_inf *info);
 int						ft_check_arg_opt(t_pile *a, t_inf *info, char **av,
 		int *nb_av);
 #endif

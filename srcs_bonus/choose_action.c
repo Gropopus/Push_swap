@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:38:23 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 18:02:01 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:04:06 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,7 @@
 void	ft_choose_action4(t_pile *a, t_pile *b, t_inf *info, int choice)
 {
 	info->s_test = -info->s_test;
-	if (choice == 1)
-	{
-		while (info->f_test > 0 && info->s_test > 0)
-		{
-			ft_rrr(a, b, 'y');
-			ft_print_piles(a, b, info->opt);
-			info->f_test -= 1;
-			info->s_test -= 1;
-		}
-	}
+	ft_choose_action5(a, b, info, choice);
 	while (info->f_test > 0)
 	{
 		if (choice == 0)

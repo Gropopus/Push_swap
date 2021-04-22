@@ -6,7 +6,7 @@
 #    By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 18:54:46 by thsembel          #+#    #+#              #
-#    Updated: 2021/04/21 15:00:40 by thsembel         ###   ########.fr        #
+#    Updated: 2021/04/22 12:12:23 by thsembel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRCS_BONUS	=	./srcs_bonus/push_swap.c\
 				./srcs_bonus/action_count.c \
 				./srcs_bonus/choose_action.c \
 				./srcs_bonus/nlist_compare.c \
-				./srcs_bonus/display_bonus.c
+				./srcs_bonus/display_bonus.c \
+				./srcs_bonus/choose_action2.c
 
 SRCS2		=	./checker_srcs/utils.c \
 				./checker_srcs/check_arg.c \

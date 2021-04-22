@@ -6,13 +6,13 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:01:03 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 15:30:20 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:55:39 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	sort_b_pile(t_pile *b, t_inf *info)
+void	sort_b_pile(t_pile *b, t_pile *a, t_inf *info)
 {
 	while (!ft_is_rsorted(b->head))
 	{
@@ -30,6 +30,7 @@ void	sort_b_pile(t_pile *b, t_inf *info)
 				&& !ft_is_rsorted(b->head))
 				ft_sb(b, 'y');
 		}
+		ft_is_print(a, b, info);
 	}
 }
 
@@ -42,12 +43,21 @@ void	sort_a_pile_next(t_pile *a, t_pile *b, t_inf *info)
 			&& b->head->nbr > b->head->next->nbr)
 			|| (b->head && b->head->nbr == info->min))
 			&& !ft_is_rsorted(b->head))
+		{
 			ft_rr(a, b, 'y');
+			ft_is_print(a, b, info);
+		}
 		else
+		{
 			ft_ra(a, 'y');
+			ft_is_print(a, b, info);
+		}
 	}
 	if (a->head->nbr < info->med)
+	{
 		ft_pb(a, b, 'y');
+		ft_is_print(a, b, info);
+	}
 }
 
 void	sort_a_pile(t_pile *a, t_pile *b, t_inf *info)
@@ -56,11 +66,20 @@ void	sort_a_pile(t_pile *a, t_pile *b, t_inf *info)
 	{
 		if (b->head && b->head && b->head->next
 			&& b->head->nbr < b->head->next->nbr && !ft_is_rsorted(b->head))
+		{
 			ft_ss(a, b, 'y');
+			ft_is_print(a, b, info);
+		}
 		else if (a->head->nbr == info->max)
+		{
 			ft_ra(a, 'y');
+			ft_is_print(a, b, info);
+		}
 		else
+		{
 			ft_sa(a, 'y');
+			ft_is_print(a, b, info);
+		}
 	}
 	else
 		sort_a_pile_next(a, b, info);
@@ -71,9 +90,12 @@ void	small_pile_algo(t_pile *a, t_pile *b, t_inf *info)
 	while (!ft_is_sorted(a->head))
 		sort_a_pile(a, b, info);
 	if (b->head)
-		sort_b_pile(b, info);
+		sort_b_pile(b, a, info);
 	while (b->head)
+	{
 		ft_pa(a, b, 'y');
+		ft_is_print(a, b, info);
+	}
 	if (!ft_is_sorted(a->head))
 		small_pile_algo(a, b, info);
 }

@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:30:08 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 18:01:34 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:11:26 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,28 +132,7 @@ void	big_pile_algo(t_pile *a, t_pile *b, t_inf *info, int val)
 	size = ft_nlist_size(a->head);
 	while (ft_nlist_size(a->head) > (int)(size / 2) + 1)
 	{
-		while (a->head->nbr == info->min || a->head->nbr == info->max
-		|| a->head->nbr > info->med)
-		{
-			val = ft_is_rot_med(a, info);
-			if (val == 1)
-			{
-				ft_ra(a, 'y');
-				ft_print_piles(a, b, info->opt);
-			}
-			else if (val == -1)
-			{
-				ft_rra(a, 'y');
-				ft_print_piles(a, b, info->opt);
-			}
-			else
-				break ;
-		}
-		if (val != 0)
-		{
-			ft_pb(a, b, 'y');
-			ft_print_piles(a, b, info->opt);
-		}
+		push_to_b_loop(a, b, info, val);
 	}
 	big_pile_algo2(a, b, info);
 }
