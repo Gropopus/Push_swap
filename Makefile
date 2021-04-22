@@ -6,7 +6,7 @@
 #    By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 18:54:46 by thsembel          #+#    #+#              #
-#    Updated: 2021/04/22 12:12:23 by thsembel         ###   ########.fr        #
+#    Updated: 2021/04/22 13:01:13 by thsembel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,7 @@ ${NAME2}:	${OBJS2}
 
 bonus:		${OBJS_B}
 			@${CC} ${CFLAGS} -I${HEAD} ${LIBFT} -o ${NAME} $(OBJS_B)
-			@echo "pushswap	has been created\n${NC}"
+			@echo "${GREEN}pushswap	with bonus has been created\n${NC}"
 
 clean:
 			@make -C $(LIB_DIR) clean
