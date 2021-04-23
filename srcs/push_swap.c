@@ -6,11 +6,12 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:52:11 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 10:12:19 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/23 10:51:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include "../libft/libft.h"
 
 int		ascending_sort(t_pile *a, int swap, int nb)
 {

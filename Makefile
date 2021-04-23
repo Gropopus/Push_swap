@@ -6,7 +6,7 @@
 #    By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 18:54:46 by thsembel          #+#    #+#              #
-#    Updated: 2021/04/22 13:01:13 by thsembel         ###   ########.fr        #
+#    Updated: 2021/04/23 11:01:28 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ SRCS2		=	./checker_srcs/utils.c \
 				./checker_srcs/checker.c \
 				./checker_srcs/checker2.c
 
-INCLUDES	=	./includes/libft.h \
+INCLUDES	=	./libft/libft.h \
 				./includes/ft_printf.h \
 				./includes/push_swap.h
 
@@ -86,7 +86,7 @@ OBJS_B		= ${SRCS_BONUS:.c=.o}
 
 RM			= rm -f
 
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror
 
 .c.o:
 		@${CC} ${CFLAGS} -I${HEAD} -c $< -o ${<:.c=.o}
@@ -99,15 +99,15 @@ ${NAME}:	${OBJS}
 			@make -C ${LIB_DIR}
 			@make -C ${LIB_DIR} bonus
 			@echo "${GREEN}\nlibft.a		has been created"
-			@${CC} ${CFLAGS} -I${HEAD} ${LIBFT} -o ${NAME} $(OBJS)
+			@${CC} ${CFLAGS} -I${HEAD} -o ${NAME} $(OBJS) ${LIBFT}
 			@echo "pushswap	has been created\n${NC}"
 
 ${NAME2}:	${OBJS2}
-			@${CC} ${CFLAGS} -I${HEAD} ${LIBFT} -o ${NAME2} $(OBJS2)
+			@${CC} ${CFLAGS} -I${HEAD} -o ${NAME2} $(OBJS2) ${LIBFT}
 			@echo "${GREEN}\nchecker		has been created${NC}"
 
 bonus:		${OBJS_B}
-			@${CC} ${CFLAGS} -I${HEAD} ${LIBFT} -o ${NAME} $(OBJS_B)
+			@${CC} ${CFLAGS} -I${HEAD} -o ${NAME} $(OBJS_B) ${LIBFT}
 			@echo "${GREEN}pushswap	with bonus has been created\n${NC}"
 
 clean:
