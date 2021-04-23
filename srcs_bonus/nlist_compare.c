@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:45:10 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/20 17:30:54 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/23 19:08:33 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_nb_rot_to_pb(t_pile *a, t_inf *info, int nb)
 	t_nlist	*tmp;
 	t_nlist	*save;
 
-	info->pb_rot[0] = INT_MAX;
+	info->pb_rot[0] = 666666666;
 	info->pb_rot[1] = ft_nlist_size(a->head);
 	info->pb_rot[2] = 0;
 	info->pb_rot[3] = nb;
@@ -91,12 +91,12 @@ void	ft_test_actions(t_pile *a, t_pile *b, t_inf *info, int i)
 	int		val;
 
 	tmp = b->head;
-	info->f_test = INT_MAX;
-	info->s_test = INT_MAX;
+	info->f_test = -666666666;
+	info->s_test = -666666666;
 	while (tmp)
 	{
 		val = ft_nb_rot_to_pb(a, info, tmp->nbr);
-		if (info->f_test == INT_MAX && info->s_test == INT_MAX)
+		if (info->f_test == -666666666 && info->s_test == -666666666)
 		{
 			info->f_test = val;
 			info->s_test = ft_get_median_index(b, i);

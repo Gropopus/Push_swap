@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:52:02 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/20 16:57:29 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/23 18:48:24 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,57 +21,46 @@ void		ft_counter(int val, int *count)
 	}
 }
 
-void		ft_count_actions3(int val2, int *count)
+void		ft_count_actions_two(int nb_rot, int med_i, int *count)
 {
-	if (val2 > 0)
-		ft_counter(val2, count);
+	if (med_i > 0)
+	{
+		while (nb_rot > 0 && med_i > 0)
+		{
+			*count += 1;
+			nb_rot--;
+			med_i--;
+		}
+		ft_counter(nb_rot, count);
+		ft_counter(med_i, count);
+	}
 	else
 	{
-		val2 = -val2;
-		ft_counter(val2, count);
+		med_i = -med_i;
+		ft_counter(nb_rot, count);
+		ft_counter(med_i, count);
 	}
 }
 
-void		ft_count_actions2(int val1, int val2, int *count)
+void		ft_count_actions_first(int nb_rot, int med_i, int *count)
 {
-	if (val2 > 0)
+	nb_rot = -nb_rot;
+	if (med_i > 0)
 	{
-		while (val1 > 0 && val2 > 0)
-		{
-			*count += 1;
-			val1--;
-			val2--;
-		}
-		ft_counter(val1, count);
-		ft_counter(val2, count);
+		ft_counter(med_i, count);
+		ft_counter(nb_rot, count);
 	}
 	else
 	{
-		val2 = -val2;
-		ft_counter(val1, count);
-		ft_counter(val2, count);
-	}
-}
-
-void		ft_count_actions1(int val1, int val2, int *count)
-{
-	val1 = -val1;
-	if (val2 > 0)
-	{
-		ft_counter(val2, count);
-		ft_counter(val1, count);
-	}
-	else
-	{
-		val2 = -val2;
-		while (val1 > 0 && val2 > 0)
+		med_i = -med_i;
+		while (nb_rot > 0 && med_i > 0)
 		{
 			*count += 1;
-			val1--;
-			val2--;
+			nb_rot--;
+			med_i--;
 		}
-		ft_counter(val1, count);
-		ft_counter(val2, count);
+		ft_counter(nb_rot, count);
+		ft_counter(med_i, count);
 	}
 }
 
@@ -81,16 +70,24 @@ void		ft_count_actions1(int val1, int val2, int *count)
 ** val2 is the number's distance from the median index
 */
 
-int			ft_count_actions(int val1, int val2)
+int			ft_count_actions(int nb_rot, int med_i)
 {
 	int count;
 
 	count = 0;
-	if (val1 < 0)
-		ft_count_actions1(val1, val2, &count);
-	else if (val1 > 0)
-		ft_count_actions2(val1, val2, &count);
+	if (nb_rot < 0)
+		ft_count_actions_first(nb_rot, med_i, &count);
+	else if (nb_rot > 0)
+		ft_count_actions_two(nb_rot, med_i, &count);
 	else
-		ft_count_actions3(val2, &count);
+	{
+		if (med_i > 0)
+			ft_counter(med_i, &count);
+		else
+		{
+			med_i = -med_i;
+			ft_counter(med_i, &count);
+		}
+	}
 	return (count);
 }

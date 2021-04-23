@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:41:31 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/22 12:50:27 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/23 18:59:17 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "../libft/libft.h"
 # include "../libft/ft_printf.h"
 
-# define INT_MAX 2147483647
 # define RED             "\033[0;31m"
 # define GREEN           "\033[0;32m"
 # define NC              "\033[0m"
