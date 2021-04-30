@@ -5,60 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/22 11:56:47 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/22 12:29:32 by thsembel         ###   ########.fr       */
+/*   Created: 2021/04/30 16:50:12 by thsembel          #+#    #+#             */
+/*   Updated: 2021/04/30 16:50:17 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	b_push(t_pile *a, t_pile *b, t_inf *info, int val)
+/*
+** Final function of the big pile sorting algo.
+** This function put the min value to the first posistion.
+*/
+
+int		ft_find_min_index(t_pile *a, t_inf *info)
 {
-	if (val != 0)
+	t_nlist	*tmp;
+	int		min_index;
+	int		i;
+
+	i = 0;
+	tmp = a->head;
+	while (tmp)
 	{
-		ft_pb(a, b, 'y');
-		ft_print_piles(a, b, info->opt);
+		if (tmp->nbr == info->min)
+			min_index = i;
+		tmp = tmp->next;
+		i++;
 	}
+	return (min_index);
 }
 
-void	push_to_b_loop(t_pile *a, t_pile *b, t_inf *info, int val)
+void	ft_last_sort_bonus(t_pile *a, t_inf *info, int i)
 {
-	while (a->head->nbr == info->min || a->head->nbr == info->max
-	|| a->head->nbr > info->med)
-	{
-		val = ft_is_rot_med(a, info);
-		if (val == 1)
+	int		min_index;
+
+	min_index = ft_find_min_index(a, info);
+	if (min_index < ft_nlist_size(a->head) / 2)
+		while (i < min_index)
 		{
 			ft_ra(a, 'y');
-			if (ft_nlist_size(b->head) > 0)
-				ft_print_piles(a, b, info->opt);
-			else
-				ft_print_piles(a, NULL, info->opt);
+			ft_print_piles(a, NULL, info->opt);
+			i++;
 		}
-		else if (val == -1)
+	else
+		while (i < ft_nlist_size(a->head) - min_index)
 		{
 			ft_rra(a, 'y');
-			if (ft_nlist_size(b->head) > 0)
-				ft_print_piles(a, b, info->opt);
-			else
-				ft_print_piles(a, NULL, info->opt);
+			ft_print_piles(a, NULL, info->opt);
+			i++;
 		}
-		else
-			break ;
-	}
-	b_push(a, b, info, val);
-}
-
-void	ft_choose_action5(t_pile *a, t_pile *b, t_inf *info, int choice)
-{
-	if (choice == 1)
-	{
-		while (info->f_test > 0 && info->s_test > 0)
-		{
-			ft_rrr(a, b, 'y');
-			ft_print_piles(a, b, info->opt);
-			info->f_test -= 1;
-			info->s_test -= 1;
-		}
-	}
 }

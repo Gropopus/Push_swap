@@ -6,62 +6,42 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:38:23 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/22 12:04:06 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/30 16:47:47 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ft_choose_action4(t_pile *a, t_pile *b, t_inf *info, int choice)
+void	ft_loop_action(t_pile *pile, t_pile *other, int nb_action, t_inf *info)
 {
-	info->s_test = -info->s_test;
-	ft_choose_action5(a, b, info, choice);
-	while (info->f_test > 0)
-	{
-		if (choice == 0)
+	if (nb_action > 0)
+		while (nb_action > 0)
 		{
-			ft_ra(a, 'y');
-			ft_print_piles(a, b, info->opt);
+			if (info->flag == 1)
+			{
+				ft_ra(pile, 'y');
+				ft_print_piles(pile, other, info->opt);
+			}
+			else if (info->flag == 2)
+			{
+				ft_rb(pile, 'y');
+				ft_print_piles(other, pile, info->opt);
+			}
+			else if (info->flag == 3)
+			{
+				ft_rra(pile, 'y');
+				ft_print_piles(pile, other, info->opt);
+			}
+			else if (info->flag == 4)
+			{
+				ft_rrb(pile, 'y');
+				ft_print_piles(other, pile, info->opt);
+			}
+			nb_action--;
 		}
-		else
-		{
-			ft_rra(a, 'y');
-			ft_print_piles(a, b, info->opt);
-		}
-		info->f_test -= 1;
-	}
-	while (info->s_test > 0)
-	{
-		ft_rrb(b, 'y');
-		ft_print_piles(a, b, info->opt);
-		info->s_test -= 1;
-	}
 }
 
-void	ft_choose_action3(t_pile *a, t_pile *b, t_inf *info)
-{
-	if (info->s_test > 0)
-	{
-		while (info->s_test > 0)
-		{
-			ft_rb(b, 'y');
-			ft_print_piles(a, b, info->opt);
-			info->s_test -= 1;
-		}
-	}
-	else
-	{
-		info->s_test = -info->s_test;
-		while (info->s_test > 0)
-		{
-			ft_rrb(b, 'y');
-			ft_print_piles(a, b, info->opt);
-			info->s_test -= 1;
-		}
-	}
-}
-
-void	ft_choose_action2(t_pile *a, t_pile *b, t_inf *info)
+void	ft_do_action_both(t_pile *a, t_pile *b, t_inf *info)
 {
 	if (info->s_test > 0)
 	{
@@ -72,63 +52,78 @@ void	ft_choose_action2(t_pile *a, t_pile *b, t_inf *info)
 			info->f_test -= 1;
 			info->s_test -= 1;
 		}
-		while (info->f_test > 0)
-		{
-			ft_ra(a, 'y');
-			ft_print_piles(a, b, info->opt);
-			info->f_test -= 1;
-		}
-		while (info->s_test > 0)
-		{
-			ft_rb(b, 'y');
-			ft_print_piles(a, b, info->opt);
-			info->s_test -= 1;
-		}
+		info->flag = 1;
+		ft_loop_action(a, b, info->f_test, info);
+		info->flag = 2;
+		ft_loop_action(b, a, info->s_test, info);
 	}
 	else
-		ft_choose_action4(a, b, info, 0);
+	{
+		info->s_test = -info->s_test;
+		info->flag = 1;
+		ft_loop_action(a, b, info->f_test, info);
+		info->flag = 4;
+		ft_loop_action(b, a, info->s_test, info);
+	}
 }
 
-void	ft_choose_action1(t_pile *a, t_pile *b, t_inf *info)
+void	ft_do_action(t_pile *a, t_pile *b, t_inf *info)
 {
 	info->f_test = -info->f_test;
 	if (info->s_test > 0)
 	{
-		while (info->s_test > 0)
-		{
-			ft_rb(b, 'y');
-			ft_print_piles(a, b, info->opt);
-			info->s_test -= 1;
-		}
-		while (info->f_test > 0)
-		{
-			ft_rra(a, 'y');
-			ft_print_piles(a, b, info->opt);
-			info->f_test -= 1;
-		}
+		info->flag = 2;
+		ft_loop_action(b, a, info->s_test, info);
+		info->flag = 3;
+		ft_loop_action(a, b, info->f_test, info);
 	}
 	else
-		ft_choose_action4(a, b, info, 1);
+	{
+		info->s_test = -info->s_test;
+		while (info->f_test > 0 && info->s_test > 0)
+		{
+			ft_rrr(a, b, 'y');
+			ft_print_piles(a, b, info->opt);
+			info->f_test -= 1;
+			info->s_test -= 1;
+		}
+		info->flag = 3;
+		ft_loop_action(a, b, info->f_test, info);
+		info->flag = 4;
+		ft_loop_action(b, a, info->s_test, info);
+	}
 }
 
 /*
 ** Function that manange actions according to the test_action results til
-** the a pile is back to full size
+** the b pile is empty
 */
 
-void	ft_choose_action(t_pile *a, t_pile *b, t_inf *info)
+void	ft_choose_action_b(t_pile *a, t_pile *b, t_inf *info, int i)
 {
-	while (ft_nlist_size(a->head) < info->size)
+	while (i > 0)
 	{
-		ft_test_actions(a, b, info, 0);
+		info->f_test = ft_test_actions(a, b, info, 0);
 		if (info->f_test < 0)
-			ft_choose_action1(a, b, info);
+			ft_do_action(a, b, info);
 		else if (info->f_test > 0)
-			ft_choose_action2(a, b, info);
+			ft_do_action_both(a, b, info);
 		else
-			ft_choose_action3(a, b, info);
+		{
+			if (info->s_test > 0)
+			{
+				info->flag = 2;
+				ft_loop_action(b, a, info->s_test, info);
+			}
+			else
+			{
+				info->flag = 4;
+				ft_loop_action(b, a, -info->s_test, info);
+			}
+		}
 		ft_pa(a, b, 'y');
 		ft_print_piles(a, b, info->opt);
+		i--;
 	}
-	ft_last_sort_bonus(a, info, 0, 0);
+	ft_last_sort_bonus(a, info, 0);
 }

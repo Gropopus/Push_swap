@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:45:10 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/23 18:57:49 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:43:41 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,57 +24,60 @@ int		ft_get_median_index(t_pile *b, int i)
 		return (-ft_nlist_size(b->head) + i);
 }
 
-void	*ft_rot_to_pb_next(t_pile *a, t_nlist *tmp, t_nlist *save, t_inf *info)
+void	ft_reset_tab(t_pile *a, t_inf *info, int nb)
 {
-	if (tmp == a->tail && tmp->nbr > info->pb_rot[3]
-		&& a->head->nbr < info->pb_rot[3])
-		info->pb_rot[1] = info->pb_rot[4];
-	if (tmp == a->head && tmp->nbr > info->pb_rot[3]
-		&& save->nbr < info->pb_rot[3] && info->pb_rot[2] == 0)
-	{
-		info->pb_rot[0] = info->pb_rot[4];
-		info->pb_rot[2] = 1;
-	}
-	info->pb_rot[4]++;
-	if (tmp->nbr > info->pb_rot[3]
-		&& save->nbr < info->pb_rot[3] && info->pb_rot[2] == 0)
-	{
-		info->pb_rot[0] = info->pb_rot[4];
-		info->pb_rot[2] = 1;
-	}
-	if (tmp->nbr > info->pb_rot[3]
-		&& save->nbr < info->pb_rot[3] && info->pb_rot[2] == 1)
-		info->pb_rot[1] = info->pb_rot[4];
-	return (tmp);
-}
-
-/*
-** calculate the number of rotations to do before b pile if ready to be
-** pushed back and returns this number.
-*/
-
-int		ft_nb_rot_to_pb(t_pile *a, t_inf *info, int nb)
-{
-	t_nlist	*tmp;
-	t_nlist	*save;
-
 	info->pb_rot[0] = 666666666;
 	info->pb_rot[1] = ft_nlist_size(a->head);
 	info->pb_rot[2] = 0;
 	info->pb_rot[3] = nb;
 	info->pb_rot[4] = 0;
-	tmp = a->head->next;
-	save = a->head;
+}
+
+void	*ft_rot_to_pb_next(t_pile *a, t_nlist *tmp, t_nlist *save, t_inf *info)
+{
 	while (tmp)
 	{
-		ft_rot_to_pb_next(a, tmp, save, info);
+		if (tmp == a->tail && tmp->nbr > info->pb_rot[3]
+			&& a->head->nbr < info->pb_rot[3])
+			info->pb_rot[1] = info->pb_rot[4];
+		if (tmp == a->head && tmp->nbr > info->pb_rot[3]
+			&& save->nbr < info->pb_rot[3] && info->pb_rot[2] == 0)
+		{
+			info->pb_rot[0] = info->pb_rot[4];
+			info->pb_rot[2] = 1;
+		}
+		info->pb_rot[4]++;
+		if (tmp->nbr > info->pb_rot[3]
+			&& save->nbr < info->pb_rot[3] && info->pb_rot[2] == 0)
+		{
+			info->pb_rot[0] = info->pb_rot[4];
+			info->pb_rot[2] = 1;
+		}
+		if (tmp->nbr > info->pb_rot[3]
+			&& save->nbr < info->pb_rot[3] && info->pb_rot[2] == 1)
+			info->pb_rot[1] = info->pb_rot[4];
 		save = save->next;
 		tmp = tmp->next;
 	}
+	return (tmp);
+}
+
+/*
+** calculate the number of rotations to do before stack a is ready for b->nbr
+** to be pushed back and returns this number.
+*/
+
+int		ft_nb_rot_to_pb(t_pile *a, t_inf *info)
+{
+	t_nlist	*tmp;
+	t_nlist	*save;
+
+	tmp = a->head->next;
+	save = a->head;
+	ft_rot_to_pb_next(a, tmp, save, info);
 	if (info->pb_rot[0] < ft_nlist_size(a->head) - info->pb_rot[1])
 		return (info->pb_rot[0]);
-	else
-		return (-(ft_nlist_size(a->head) - info->pb_rot[1]));
+	return (-(ft_nlist_size(a->head) - info->pb_rot[1]));
 }
 
 /*
@@ -85,7 +88,7 @@ int		ft_nb_rot_to_pb(t_pile *a, t_inf *info, int nb)
 ** (s_test = ft_get_median_index)
 */
 
-void	ft_test_actions(t_pile *a, t_pile *b, t_inf *info, int i)
+int		ft_test_actions(t_pile *a, t_pile *b, t_inf *info, int i)
 {
 	t_nlist	*tmp;
 	int		val;
@@ -95,14 +98,15 @@ void	ft_test_actions(t_pile *a, t_pile *b, t_inf *info, int i)
 	info->s_test = -666666666;
 	while (tmp)
 	{
-		val = ft_nb_rot_to_pb(a, info, tmp->nbr);
-		if (info->f_test == -666666666 && info->s_test == -666666666)
+		ft_reset_tab(a, info, tmp->nbr);
+		val = ft_nb_rot_to_pb(a, info);
+		if (i == 0)
 		{
 			info->f_test = val;
 			info->s_test = ft_get_median_index(b, i);
 		}
 		if (ft_count_actions(val, ft_get_median_index(b, i))
-		< ft_count_actions(info->f_test, info->s_test))
+			< ft_count_actions(info->f_test, info->s_test))
 		{
 			info->f_test = val;
 			info->s_test = ft_get_median_index(b, i);
@@ -110,4 +114,5 @@ void	ft_test_actions(t_pile *a, t_pile *b, t_inf *info, int i)
 		tmp = tmp->next;
 		i++;
 	}
+	return (info->f_test);
 }

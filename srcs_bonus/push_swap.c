@@ -6,11 +6,12 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:52:11 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/21 15:47:29 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/30 17:04:36 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include "../libft/libft.h"
 
 int		ascending_sort(t_pile *a, int swap, int nb)
 {
@@ -45,16 +46,21 @@ int		ft_get_info(t_inf *info, t_pile *a, int i, int mid_index)
 	t_pile	*tmp;
 	t_nlist	*sorted;
 
+	if ((ft_is_sorted(a->head) == 1))
+	{
+		ft_free_pile(a);
+		return (2);
+	}
 	tmp = ft_cpy_pile(a);
 	if ((ascending_sort(tmp, 1, 0)) < 0)
 		return (-1);
+	mid_index = info->size / 2;
 	info->min = tmp->head->nbr;
 	info->max = tmp->tail->nbr;
-	mid_index = info->size / 2;
 	sorted = tmp->head;
 	while (sorted)
 	{
-		if (mid_index == i)
+		if (i == mid_index)
 			info->med = sorted->nbr;
 		sorted = sorted->next;
 		i++;
@@ -82,11 +88,13 @@ int		set_pile(t_pile *a, t_inf *info, int ac, char **av)
 		i++;
 	}
 	info->size = ft_nlist_size(a->head);
-	if ((ft_get_info(info, a, 0, 0)) < 0)
+	if ((nb = ft_get_info(info, a, 0, 0)) < 0)
 	{
 		ft_error(a, NULL, info);
 		return (-1);
 	}
+	else if (nb == 2)
+		return (-1);
 	return (0);
 }
 

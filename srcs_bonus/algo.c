@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:01:03 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/22 14:07:44 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/30 15:59:36 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,7 @@ void	small_pile_algo(t_pile *a, t_pile *b, t_inf *info)
 
 void	algo_manager(t_pile *a, t_pile *b, t_inf *info)
 {
-	if (info->size < 7 || (info->size > 6
-		&& ft_is_sorted(a->head->next->next) == 1))
+	if (info->size < 7)
 		small_pile_algo(a, b, info);
 	else
 		big_pile_algo(a, b, info, 2);

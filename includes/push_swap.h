@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:41:31 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/23 18:59:17 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/30 16:48:34 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct			s_inf
 	int					med;
 	int					size;
 	int					opt;
+	int					flag;
 	int					med_rot[4];
 	int					pb_rot[5];
 	int					f_test;
@@ -103,7 +104,7 @@ void					ft_choose_action(t_pile *a, t_pile *b, t_inf *info);
 **		big_pile_algo.c
 */
 void					big_pile_algo(t_pile *a, t_pile *b,
-	t_inf *data, int val);
+	t_inf *data, int cmp_med);
 void					last_sort(t_pile *a, t_inf *info, int i);
 /*
 **		median_rotation.c
@@ -112,7 +113,7 @@ int						ft_is_rot_med(t_pile *a, t_inf *info);
 /*
 **		nlist_compare.c
 */
-void					ft_test_actions(t_pile *a, t_pile *b,
+int						ft_test_actions(t_pile *a, t_pile *b,
 	t_inf *info, int i);
 /*
 **		action_count.c
@@ -129,13 +130,12 @@ void					display_result(t_pile *a, t_pile *b);
 /*
 **		bonus modifications
 */
+int						ft_find_min_index(t_pile *a, t_inf *info);
 void					ft_print_piles(t_pile *a, t_pile *b, int perm);
 void					ft_last_sort_bonus(t_pile *a, t_inf *info,
-		int i, int min_index);
-void					ft_choose_action5(t_pile *a, t_pile *b, t_inf *info,
-		int choice);
-void					push_to_b_loop(t_pile *a, t_pile *b, t_inf *info,
-		int val);
+		int i);
+void					ft_choose_action_b(t_pile *a, t_pile *b, t_inf *info,
+	int i);
 void					ft_is_print(t_pile *a, t_pile *b, t_inf *info);
 int						ft_check_arg_opt(t_pile *a, t_inf *info, char **av,
 		int *nb_av);

@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:30:08 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/20 15:59:52 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/04/30 17:12:55 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 ** This function put the min value to the first posistion.
 */
 
-void	last_sort(t_pile *a, t_inf *info, int i)
+int		ft_find_min_index(t_pile *a, t_inf *info)
 {
 	t_nlist	*tmp;
 	int		min_index;
+	int		i;
 
+	i = 0;
 	tmp = a->head;
 	while (tmp)
 	{
@@ -30,7 +32,14 @@ void	last_sort(t_pile *a, t_inf *info, int i)
 		tmp = tmp->next;
 		i++;
 	}
-	i = 0;
+	return (min_index);
+}
+
+void	last_sort(t_pile *a, t_inf *info, int i)
+{
+	int		min_index;
+
+	min_index = ft_find_min_index(a, info);
 	if (min_index < ft_nlist_size(a->head) / 2)
 		while (i < min_index)
 		{
@@ -69,25 +78,22 @@ void	sort_pile_a(t_pile *a, t_inf *info)
 ** the nbrs that are not min/max are pushed to pile b
 */
 
-void	big_pile_algo2(t_pile *a, t_pile *b, t_inf *info)
+void	big_pile_algo2(t_pile *a, t_pile *b, t_inf *info, t_nlist *tmp)
 {
-	t_nlist	*tmp;
-
-	tmp = a->head;
-	while (ft_nlist_size(a->head) > 3)
+	while (ft_nlist_size(a->head) >= 4)
 	{
-		if (tmp->nbr == info->min || tmp->nbr == info->max)
+		if (tmp->nbr == info->max || tmp->nbr == info->min)
 		{
 			ft_ra(a, 'y');
 			tmp = a->head;
 		}
-		if (tmp->nbr != info->min && tmp->nbr != info->max)
+		if (tmp->nbr != info->max && tmp->nbr != info->min)
 		{
 			ft_pb(a, b, 'y');
 			tmp = a->head;
 		}
 	}
-	if (a->head->nbr == info->min && a->head->next->next->nbr != info->max)
+	if (a->head->nbr == info->min && a->head->next->next->nbr == info->med)
 	{
 		ft_rra(a, 'y');
 		ft_sa(a, 'y');
@@ -97,33 +103,25 @@ void	big_pile_algo2(t_pile *a, t_pile *b, t_inf *info)
 	ft_choose_action(a, b, info);
 }
 
-/*
-** function that sorts each number of pile a bigger than the med or the
-** min value. if the nbr is located at the top of the med value ->ra else ->rra
-** break if the value is med or < than med.
-** if the a pile is smaller than 4 the pb.
-*/
-
-void	big_pile_algo(t_pile *a, t_pile *b, t_inf *info, int val)
+void	big_pile_algo(t_pile *a, t_pile *b, t_inf *info, int cmp_med)
 {
-	int		size;
+	int			half;
+	t_nlist		*tmp;
 
-	size = ft_nlist_size(a->head);
-	while (ft_nlist_size(a->head) > (int)(size / 2) + 1)
+	half = (ft_nlist_size(a->head) / 2) + 1;
+	while (ft_nlist_size(a->head) > half)
 	{
-		while (a->head->nbr == info->min || a->head->nbr == info->max
-		|| a->head->nbr > info->med)
+		while ((a->head->nbr == info->min || a->head->nbr == info->max
+		|| a->head->nbr > info->med) && (cmp_med = ft_is_rot_med(a, info)) != 0)
 		{
-			val = ft_is_rot_med(a, info);
-			if (val == 1)
-				ft_ra(a, 'y');
-			else if (val == -1)
+			if (cmp_med == -1)
 				ft_rra(a, 'y');
-			else
-				break ;
+			else if (cmp_med == 1)
+				ft_ra(a, 'y');
 		}
-		if (val != 0)
+		if (cmp_med != 0)
 			ft_pb(a, b, 'y');
 	}
-	big_pile_algo2(a, b, info);
+	tmp = a->head;
+	big_pile_algo2(a, b, info, tmp);
 }
