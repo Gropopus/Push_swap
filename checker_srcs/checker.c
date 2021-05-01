@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:09:58 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/20 12:27:55 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/05/01 13:17:08 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int		ft_handle_input(t_pile *a, t_pile *b)
 	{
 		if ((action_manager(a, b, line)) < 0)
 		{
+			if ((ft_strcmp(line, "finish")) == 0)
+			{
+				free(line);
+				return (0);
+			}
 			free(line);
 			line = NULL;
 			return (-1);
