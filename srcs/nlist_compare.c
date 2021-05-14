@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:45:10 by thsembel          #+#    #+#             */
-/*   Updated: 2021/05/01 13:08:47 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/05/12 11:55:10 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,36 +28,33 @@ int		ft_get_median_index(t_pile *b, int i)
 
 void	ft_reset_tab(t_pile *a, t_inf *info, int nb)
 {
-	info->pb_rot[0] = 666666666;
-	info->pb_rot[1] = ft_nlist_size(a->head);
-	info->pb_rot[2] = 0;
-	info->pb_rot[3] = nb;
-	info->pb_rot[4] = 0;
+	info->a = 666666666;
+	info->b = ft_nlist_size(a->head);
+	info->c = 0;
+	info->d = nb;
+	info->e = 0;
 }
 
 void	*ft_rot_to_pb_next(t_pile *a, t_nlist *tmp, t_nlist *prev, t_inf *info)
 {
 	while (tmp)
 	{
-		if (tmp == a->tail && tmp->nbr > info->pb_rot[3]
-			&& a->head->nbr < info->pb_rot[3])
-			info->pb_rot[1] = info->pb_rot[4];
-		if (tmp == a->head && tmp->nbr > info->pb_rot[3]
-			&& prev->nbr < info->pb_rot[3] && info->pb_rot[2] == 0)
+		if (tmp == a->tail && tmp->nbr > info->d && a->head->nbr < info->d)
+			info->b = info->e;
+		if (tmp == a->head && tmp->nbr > info->d
+			&& prev->nbr < info->d && info->c == 0)
 		{
-			info->pb_rot[0] = info->pb_rot[4];
-			info->pb_rot[2] = 1;
+			info->a = info->e;
+			info->c = 1;
 		}
-		info->pb_rot[4]++;
-		if (tmp->nbr > info->pb_rot[3]
-			&& prev->nbr < info->pb_rot[3] && info->pb_rot[2] == 0)
+		info->e++;
+		if (tmp->nbr > info->d && prev->nbr < info->d && info->c == 0)
 		{
-			info->pb_rot[0] = info->pb_rot[4];
-			info->pb_rot[2] = 1;
+			info->a = info->e;
+			info->c = 1;
 		}
-		if (tmp->nbr > info->pb_rot[3]
-			&& prev->nbr < info->pb_rot[3] && info->pb_rot[2] == 1)
-			info->pb_rot[1] = info->pb_rot[4];
+		if (tmp->nbr > info->d && prev->nbr < info->d && info->c == 1)
+			info->b = info->e;
 		prev = prev->next;
 		tmp = tmp->next;
 	}
@@ -77,9 +74,9 @@ int		ft_nb_rot_to_pb(t_pile *a, t_inf *info)
 	tmp = a->head->next;
 	previous = a->head;
 	ft_rot_to_pb_next(a, tmp, previous, info);
-	if (info->pb_rot[0] < ft_nlist_size(a->head) - info->pb_rot[1])
-		return (info->pb_rot[0]);
-	return (-(ft_nlist_size(a->head) - info->pb_rot[1]));
+	if (info->a < ft_nlist_size(a->head) - info->b)
+		return (info->a);
+	return (-(ft_nlist_size(a->head) - info->b));
 }
 
 /*

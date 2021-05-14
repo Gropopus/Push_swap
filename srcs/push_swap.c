@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:52:11 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/30 11:11:47 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/05/14 14:51:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,11 @@ int		main(int ac, char **av)
 		return (-1);
 	if ((info = malloc(sizeof(t_inf))) == NULL)
 		return (-1);
-	if ((set_pile(a, info, ac, av)) < 0)
+	if (((set_pile(a, info, ac, av)) < 0) || ((b = ft_new_pile()) == NULL))
+	{
+		free(info);
 		return (-1);
-	if ((b = ft_new_pile()) == NULL)
-		return (-1);
+	}
 	algo_manager(a, b, info);
 	ft_free_pile(a);
 	ft_free_pile(b);

@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:45:47 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/19 15:43:13 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/05/14 14:33:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ void	ft_free_pile(t_pile *pile)
 			save = save->next;
 		}
 		free(tmp);
+		tmp = NULL;
 	}
 	free(pile);
+	pile = NULL;
 }
 
 t_pile	*ft_cpy_pile(t_pile *a)

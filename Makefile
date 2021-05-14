@@ -6,7 +6,7 @@
 #    By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/17 18:54:46 by thsembel          #+#    #+#              #
-#    Updated: 2021/04/30 10:41:18 by thsembel         ###   ########.fr        #
+#    Updated: 2021/05/14 14:38:55 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,14 +86,14 @@ OBJS_B		= ${SRCS_BONUS:.c=.o}
 
 RM			= rm -f
 
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -g
 
 .c.o:
 		@${CC} ${CFLAGS} -I${HEAD} -c $< -o ${<:.c=.o}
 		@echo "${GREEN}[ OK ]	${ORANGE}${<:.s=.o}${NC}"
 
 
-all:		${NAME} ${NAME2}
+all:		${NAME}
 
 ${NAME}:	${OBJS}
 			@make -C ${LIB_DIR}
@@ -109,7 +109,7 @@ ${NAME2}:	${OBJS2}
 bonus:		${OBJS_B}
 			@${CC} ${CFLAGS} -I${HEAD} -o ${NAME} $(OBJS_B) ${LIBFT}
 			@echo "${GREEN}pushswap	with bonus has been created\n${NC}"
-
+			
 clean:
 			@make -C $(LIB_DIR) clean
 			@${RM} ${OBJS} ${OBJS2} ${OBJS_B}

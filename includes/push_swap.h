@@ -6,7 +6,7 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 17:41:31 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/30 16:48:34 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/05/12 15:54:17 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ typedef struct			s_inf
 	int					opt;
 	int					flag;
 	int					med_rot[4];
-	int					pb_rot[5];
+	int					a;
+	int					b;
+	int					c;
+	int					d;
+	int					e;
 	int					f_test;
 	int					s_test;
 }						t_inf;
@@ -73,6 +77,7 @@ void					algo_manager(t_pile *a, t_pile *b, t_inf *info);
 */
 int						ft_is_sorted(t_nlist *nlist);
 int						ft_is_rsorted(t_nlist *nlist);
+int						ft_find_min_index(t_pile *a, t_inf *info);
 /*
 **		push_a_b.c
 */

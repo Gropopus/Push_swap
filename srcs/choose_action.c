@@ -6,11 +6,35 @@
 /*   By: thsembel <thsembel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 18:38:23 by thsembel          #+#    #+#             */
-/*   Updated: 2021/04/30 12:36:02 by thsembel         ###   ########.fr       */
+/*   Updated: 2021/05/12 15:56:08 by thsembel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+/*
+** Final function of the big pile sorting algo.
+** This function put the min value to the first posistion.
+*/
+
+void	last_sort(t_pile *a, t_inf *info, int i)
+{
+	int		min_index;
+
+	min_index = ft_find_min_index(a, info);
+	if (min_index < ft_nlist_size(a->head) / 2)
+		while (i < min_index)
+		{
+			ft_ra(a, 'y');
+			i++;
+		}
+	else
+		while (i < ft_nlist_size(a->head) - min_index)
+		{
+			ft_rra(a, 'y');
+			i++;
+		}
+}
 
 void	ft_loop_action(t_pile *pile, int nb_action, int action)
 {
