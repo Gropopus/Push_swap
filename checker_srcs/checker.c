@@ -111,12 +111,12 @@ int		main(int ac, char **av)
 	}
 	if ((b = ft_new_pile()) == NULL)
 	{
-		ft_putstr_fd("Error\n", 2);
+		ft_error(a, NULL, NULL);
 		return (-1);
 	}
 	if ((ft_add_and_check(a, ac, av)) < 0)
 	{
-		ft_putstr_fd("Error\n", 2);
+		ft_error(a, b, NULL);
 		return (-1);
 	}
 	if ((ft_handle_input(a, b)) < 0)

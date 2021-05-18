@@ -111,10 +111,11 @@ int		main(int ac, char **av)
 	if ((info = malloc(sizeof(t_inf))) == NULL)
 		return (-1);
 	info->opt = 0;
-	if ((set_pile(a, info, ac, av)) < 0)
+	if (((set_pile(a, info, ac, av)) < 0) || ((b = ft_new_pile()) == NULL))
+	{
+		free(info);
 		return (-1);
-	if ((b = ft_new_pile()) == NULL)
-		return (-1);
+	}
 	algo_manager(a, b, info);
 	ft_free_pile(a);
 	ft_free_pile(b);
